@@ -1,0 +1,101 @@
+{% block body %}
+
+<style>
+    body {
+       
+        font-family: 'Open Sans', sans-serif;
+        background-color: #f7f7f7;
+    }
+
+    .lib-panel {
+        margin-bottom: 20Px;
+    }
+
+    .lib-panel img {
+        width: 100px;
+        background-color: transparent;
+    }
+
+    .lib-panel .row,
+    .lib-panel .col-md-6 {
+        padding: 0;
+        background-color: #FFFFFF;
+    }
+
+
+    .lib-panel .lib-row {
+        padding: 0 20px 0 20px;
+    }
+
+    .lib-panel .lib-row.lib-header {
+        background-color: #FFFFFF;
+        font-size: 20px;
+        padding: 10px 20px 0 20px;
+    }
+
+    .lib-panel .lib-row.lib-header .lib-header-seperator {
+        height: 2px;
+        width: 26px;
+        background-color: #d9d9d9;
+        margin: 7px 0 7px 0;
+    }
+
+    .lib-panel .lib-row.lib-desc {
+        position: relative;
+        height: 100%;
+        display: block;
+        font-size: 13px;
+    }
+
+    .lib-panel .lib-row.lib-desc a {
+        position: absolute;
+        width: 100%;
+        bottom: 10px;
+        left: 20px;
+    }
+
+    .row-margin-bottom {
+        margin-bottom: 20px;
+    }
+
+
+    .no-padding {
+        padding: 0;
+    }
+
+
+    .card-horizontal {
+        display: flex;
+        flex: 1 1 auto;
+    }
+</style>
+
+
+{% for k in pop_post %}
+
+<div class="col-12 mt-3">
+    <a href="{{k.get_absolute_url}}" >
+    <div class="card-horizontal">
+        <div>
+            <div class="img-square-wrapper">
+                
+                <img src="{{k.thumbnail.url}}" alt=""  width="150px;">
+            </div>
+        </div>
+        <div class="card-body" style="margin-top: -20px;">
+
+            <a href="" style="font-size:13px;">{{k.title|slice:":55" }}</a>
+            <br>
+            <span style="font-size: 12px;">{{k.time_uplaod}}</span>
+        </div>
+    </div>
+    </a>
+</div>
+
+<hr>
+
+
+
+
+{% endfor %}
+{% endblock %}

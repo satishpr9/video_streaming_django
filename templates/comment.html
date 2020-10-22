@@ -1,0 +1,16 @@
+ {% for k in comment %}
+      <div class="card-text">
+        <div class="upper-section">
+        
+          
+          
+          <a style="font-size: 20px;text-decoration: none; color: black;" href="{% url 'channel' k.user %}">
+            {{k.user}}  </a>
+            
+            <span style="font-size: small;">{{k.created}}</span></p>
+        </div>
+        <p style="font-size: small;">{{k.comment}}</p>
+      </div>
+      <hr style="font-size: larger;color: black;">
+      
+      {% endfor %}

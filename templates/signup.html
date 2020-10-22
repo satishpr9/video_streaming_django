@@ -1,0 +1,64 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+<div class="container">
+  <div class="form-group">
+    <form arction="" method="POST">
+      {% csrf_token %}
+      <input type="email" name="email" id="email" class="form-control" placeholder="email" aria-describedby="helpId">
+      <input type="text" name="username" id="username" class="form-control" placeholder="username">
+      <input type="password" name="password" id="password" class="form-control" placeholder="password">
+      <input type="password" name="confpass" id="confpass" class="form-control" placeholder="confirm password">
+
+      <input type="submit">
+      <div class="text-center">
+        <a href="" class="btn btn-danger " data-toggle="modal" data-target="#modalLoginForm">
+          Login</a>
+      </div>
+    </form>
+
+
+
+    <!---modal-->
+    <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h4 class="modal-title w-100 font-weight-bold">Log in</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form method="POST" action="/user_login">
+            {% csrf_token %}
+            <div class="modal-body mx-3">
+              <div class="md-form mb-5">
+                <i class="fa fa-envelope prefix grey-text" style="font-size: larger;"></i>
+                <input type="username" name="username" placeholder="username" id="defaultForm-email"
+                  class="form-control validate">
+                <label data-error="wrong" data-success="right" for="defaultForm-email">Your email</label>
+              </div>
+
+              <div class="md-form mb-4">
+                <i class="fa fa-lock prefix blue-text" style="font-size: larger;"></i>
+                <input type="password" name="password" placeholder="password" id="defaultForm-pass"
+                  class="form-control validate">
+                <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
+              </div>
+
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+              <button class="btn btn-default">Login</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+</div>
+{% endblock  %}

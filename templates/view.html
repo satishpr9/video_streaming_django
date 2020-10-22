@@ -1,0 +1,105 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+
+<div class="container-fluid  mt-4">
+  <div class="row">
+
+{% for i in post  %}
+    
+    <div class="col-md-8 ">
+      <video width="850" id="videoPlayer" class="video-js vjs-big-play-centered " controls poster="{{i.thumbnail.url}}"
+        data-setup="{}">
+        <!-- <source src="{{i.video.url}}" type="video/mp4"> -->
+        <source src="{{i.video.url}}" type="video/mp4" res="240" label="240p" />
+        <source src="movie.ogg" type="video/ogg">
+
+        <p class="vjs-no-js">
+          To view this video please enable JavaScript, and consider upgrading to a
+          web browser that
+          <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+        </p>
+      </video>
+
+
+      <div class="card-text">
+        <p style="width: 800px;">{{i.title}}</p>
+        <div class="view_date">
+          <span style="color: grey;">{{i.view}}</span>
+          <span style="color: grey;" id="dot">.</span>
+          <span style="color: grey;">{{i.time_uplaod}}</span>
+        </div>
+      </div>
+      <hr>
+      {% for i in channel %}
+      <div class="card-text">
+        <img src="{{i.image.url}}" alt="" class="img-thumbnail" width="65px">
+        <a href="{% url 'channel' i.user %}" style="text-decoration: none; color: black;" class="ml-1">{{i.name}}</a>
+        {% endfor %}
+        <p class="card-text " style="margin-left:80px;">{{i.desc_field}}</p>
+      </div>
+
+      <br>
+      <hr>
+
+      <div class="container">
+        {% if user.is_authenticated %}
+        <form method="POST" action="{% url 'postComment'  %}">
+          {% csrf_token %}
+          <div class="form-group">
+            <textarea type="text" class="form-control" rows="5" cols="10" placeholder="Enter comment" name="comment"
+              required=""></textarea>
+            <input type="hidden" name="postSno" value="{{i.id}}">
+          </div>
+          <button type="submit" class="btn btn-success"><i class="fa fa-send-o" style="font-size:20px;color:white;"></i>
+            Add</button>
+        </form>
+        {% else %}
+        <a href="/signup">
+          <textarea type="text" class="form-control" rows="5" cols="10" required=""></textarea></a>
+        {% endif %}
+
+      </div>
+
+
+     
+     {% include 'comment.html' %}
+      
+      </div>
+
+    {% endfor %}
+
+    <div class="col-md-4">
+      {% include "sidebar.html" %}
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block script %}
+
+<script>
+  var player = videojs('videoPlayer', {
+
+    loop: true,
+    fluid: true,
+    language: 'en',
+    playbackRates: [0.25, 1, 2, 3, 4],
+    plugins: {
+      hotkeys: {
+
+      }
+    }
+  });
+  player.hlsQualitySelector();
+
+
+
+
+</script>
+
+
+{% endblock %}

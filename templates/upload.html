@@ -1,0 +1,18 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+{% load crispy_forms_tags %}
+<div class="container">
+<h1 style="margin-left: 100px;">Video Uploader</h1>
+<form enctype="multipart/form-data" method="POST" action="" style="margin-left:100px;">
+  {% csrf_token %}
+  {{ form|crispy }}
+  
+  <input type="submit" class="btn btn-success"/>
+</form>
+
+
+ 
+</container>
+
+{% endblock  %}

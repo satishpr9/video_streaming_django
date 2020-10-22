@@ -1,0 +1,118 @@
+{% extends "base/base.html" %}
+
+
+
+{% block style %}
+
+<style>
+    .userImage {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+
+    }
+
+    .pst {
+        width: 350px;
+        height: 75%;
+        margin-bottom: 30px;
+        font-weight: 600px;
+    }
+
+    .pst:hover {
+        opacity: 0.9;
+    }
+
+    .info {
+
+        padding-left: 3%;
+    }
+
+    hr {
+        border-top: 2px solid #000000;
+    }
+
+
+    .profile {
+        margin-top: 10px;
+    }
+</style>
+{% endblock %}
+
+
+
+{% block body %}
+
+<div class="container my-4">
+    <div class="media">
+
+        <img src="{{img.url}}" class="align-self-start mr-3 userImage" alt="...">
+
+        {%  for i in name %}
+        <div class="media-body info">
+            <h4 class="mt-0" style="color: black;font-weight: bolder;">{{i.name }}</h4>
+          
+        </div>
+        {% endfor %}
+        
+        {% comment %} <a href="" type="button" class="btn btn-warning " role="button" id="follow" >Subscribe</a>
+       
+        <a href="" type="button" class="btn btn-warning " role="button" id="follow" >Subscribed</a> {% endcomment %}
+       
+
+       <a href="accounts/editchannel" role="button" class="btn btn-danger">Edit Profile</a></button>
+
+
+
+    </div>
+
+    <hr>
+
+    <div class='row'>
+        {% for i in posts %}
+        {% for j in i %}
+        <div class="col-md-4 my-2">
+            <div class="video-card" style="width:300px; ">
+              <a href="{{j.get_absolute_url}}">
+                <img class="" src="{{j.thumbnail.url}}" alt="Card image" width="320" height="200" style="border-radius: 3px;">
+                <div class="card-body">
+                  <p class="card-title">{{j.title|slice:":60"}}</p>
+              </a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+
+<!--this is the end of container-->
+
+<!--modal-->
+{% endblock %}
+
+
+{% block script %}
+
+<script>
+$("#follow").click(function(e){
+    e.preventDefault(); 
+    var href=this.href;
+    $.ajax({
+        url:href,
+        success : function(response){
+            console.log(response);
+            if(response['following'])
+            {
+                $('#follow').html('unfollow');
+            }
+
+            else{
+                $('#follow').html('follow');
+            }
+        }
+    })
+})
+
+</script>
+{% endblock %}
